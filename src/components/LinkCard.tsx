@@ -5,14 +5,17 @@ import type { LinkItem } from "@/data/profile";
 
 type Props = {
   link: LinkItem;
-  initialClicks: number;
+  /** DB에서 받아 온 클릭 수. 받기 전에는 0이다. */
+  savedClicks: number;
 };
 
-export default function LinkCard({ link, initialClicks }: Props) {
-  const [clicks, setClicks] = useState(initialClicks);
+export default function LinkCard({ link, savedClicks }: Props) {
+  // 이 화면에서 누른 횟수. 서버 값이 나중에 도착해도 사라지지 않도록 따로 센다.
+  const [newClicks, setNewClicks] = useState(0);
+  const clicks = savedClicks + newClicks;
 
   const handleClick = () => {
-    setClicks((count) => count + 1);
+    setNewClicks((count) => count + 1);
     // 새 탭으로 이동해도 요청이 끊기지 않도록 sendBeacon을 사용한다.
     const body = new Blob([JSON.stringify({ id: link.id })], {
       type: "application/json",
@@ -30,7 +33,7 @@ export default function LinkCard({ link, initialClicks }: Props) {
     >
       <span className="truncate font-semibold tracking-tight">{link.title}</span>
       <span className="shrink-0 text-xs tabular-nums text-stone-500 dark:text-stone-400">
-        클릭 {clicks.toLocaleString("ko-KR")}회
+        {clicks.toLocaleString("ko-KR")}회
       </span>
     </a>
   );

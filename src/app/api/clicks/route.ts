@@ -1,6 +1,13 @@
 import { NextResponse } from "next/server";
 import { links } from "@/data/profile";
-import { incrementClick } from "@/lib/clicks";
+import { getClickCounts, incrementClick } from "@/lib/clicks";
+
+// 클릭 수는 요청마다 최신 값을 돌려준다.
+export const dynamic = "force-dynamic";
+
+export async function GET() {
+  return NextResponse.json(await getClickCounts());
+}
 
 export async function POST(request: Request) {
   let id: unknown;
