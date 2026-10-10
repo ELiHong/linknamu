@@ -1,13 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
 import { profile } from "@/data/profile";
+// 화면에 쓰인 글자가 속한 조각만 내려받는 다이나믹 서브셋.
+import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 import "./globals.css";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: `${profile.name} | 링크나무`,
@@ -16,8 +11,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f7f4" },
-    { media: "(prefers-color-scheme: dark)", color: "#0d0f0e" },
+    { media: "(prefers-color-scheme: light)", color: "#fffaf1" },
+    { media: "(prefers-color-scheme: dark)", color: "#1b1512" },
   ],
 };
 
@@ -34,11 +29,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body
-        className={`${geistSans.variable} font-sans antialiased transition-colors`}
-      >
-        {children}
-      </body>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }

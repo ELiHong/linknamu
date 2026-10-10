@@ -10,10 +10,10 @@ export default function Profile({ profile }: { profile: ProfileData }) {
         width={112}
         height={112}
         priority
-        className="h-28 w-28 rounded-full object-cover ring-2 ring-black/10 dark:ring-white/15"
+        className="h-28 w-28 rounded-full object-cover ring-4 ring-white/80 shadow-[0_2px_6px_rgba(120,70,30,0.12),0_18px_36px_-12px_rgba(190,105,50,0.5)] dark:ring-white/15 dark:shadow-[0_2px_6px_rgba(0,0,0,0.4),0_18px_36px_-12px_rgba(0,0,0,0.7)]"
       />
-      <h1 className="mt-5 text-2xl font-bold">{profile.name}</h1>
-      <p className="mt-2 text-base text-neutral-600 dark:text-neutral-400">
+      <h1 className="mt-6 text-2xl font-bold tracking-tight">{profile.name}</h1>
+      <p className="mt-2 max-w-[18rem] text-balance break-keep text-[15px] leading-relaxed text-stone-600 dark:text-stone-400">
         {profile.bio}
       </p>
     </header>
